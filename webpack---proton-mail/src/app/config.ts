@@ -1,0 +1,12 @@
+export const CLIENT_TYPE = 1;
+export const CLIENT_SECRET = '';
+export const APP_VERSION = '4.12.9';
+export const COMMIT = '55ac863c0f2c1b98f75686c90a3b5d4b5bf033a3';
+export const BRANCH = 'proton-mail@4.12.9';
+export const DATE_VERSION = 'Wed, 22 Dec 2021 12:11:20 GMT';
+export const APP_NAME = 'proton-mail';
+export const API_URL = '/api';
+export const LOCALES = {"en_US":"English","ca_ES":"Català","cs_CZ":"Čeština","el_GR":"Ελληνικά","es_ES":"Español (España)","es_MX":"Español (México)","da_DK":"Dansk","de_DE":"Deutsch","fr_FR":"Français","fr_CA":"Français (Canada)","hr_HR":"Hrvatski","hu_HU":"Magyar","id_ID":"Bahasa (Indonesia)","it_IT":"Italiano","ja_JP":"日本語","kab_DZ":"Taqbaylit","nl_NL":"Nederlands","pl_PL":"Polski","pt_PT":"Português (Portugal)","pt_BR":"Português (Brasil)","ro_RO":"Română","ru_RU":"Русский","tr_TR":"Türkçe","uk_UA":"Українська","zh_CN":"简体中文","zh_TW":"繁體中文"};
+export const API_VERSION = '3';
+export const VERSION_PATH = '/assets/version.json';
+export const SENTRY_DSN = 'https://64982c67a00b4e68833169e2c4f26819@sentry/9';

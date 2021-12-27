@@ -1,0 +1,9 @@
+
+$path-images: "~@proton/styles/assets/img/shared/";
+
+
+.checklist-item_root--incomplete {
+	&:hover {
+		color: var(--primary);
+	}
+}

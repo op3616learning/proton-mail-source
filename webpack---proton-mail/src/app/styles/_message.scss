@@ -1,0 +1,284 @@
+@import '~@proton/styles/scss/config';
+
+.message-conversation-summary {
+	.is-appearing-content {
+		@extend %appearing-container;
+	}
+
+	&-is-loading {
+		pointer-events: none;
+	}
+
+	&-is-loading &-header,
+	&-is-loading &-stat {
+		position: relative;
+
+		&::before {
+			@extend %item-loading-pseudo;
+			@extend %placeholder-loading;
+		}
+	}
+
+	&-is-loading &-header {
+		&::before {
+			inline-size: 25%;
+
+			@include respond-to($breakpoint-small) {
+				inline-size: 50%;
+			}
+		}
+	}
+
+	&-is-loading &-stat {
+		&::before {
+			inline-size: 2em;
+		}
+	}
+
+	&-is-loading &-star {
+		@extend %placeholder-loading;
+	}
+}
+
+.trashed-messages,
+.message-header {
+	background-color: var(--email-item-read-background-color, var(--background-weak));
+	color: var(--email-item-read-text-color, var(--text-norm));
+}
+
+.message-container {
+	border: 1px solid var(--border-norm);
+	border-radius: var(--border-radius-medium);
+	@extend %appearing-container;
+	transition: 0.15s easing(easeOutQuint);
+}
+
+.message-header {
+	border-radius: var(--border-radius-medium); // Can't overflow 'cause of ::before, so repeat radius
+	padding: 0.6em;
+
+	.is-appearing-content {
+		@extend %appearing-container;
+	}
+
+	&.is-unread {
+		background-color: var(--email-item-unread-background-color, var(--background-norm));
+		color: var(--email-item-unread-text-color, var(--text-norm));
+		font-weight: bold;
+	}
+
+	&.is-loading {
+		pointer-events: none;
+	}
+
+	&.is-loading .message-recipient-item-icon,
+	&.is-loading &-star {
+		@extend %placeholder-loading;
+	}
+
+	&.is-loading .message-recipient-item-icon {
+		background-color: currentColor;
+		opacity: 0;
+	}
+
+	&.is-loading .message-recipient-item-label,
+	&.is-loading .message-recipient-item-address,
+	&.is-loading &-metas,
+	&.is-loading &-to,
+	&.is-loading &-contact,
+	&.is-loading .message-show-hide-link-container {
+		position: relative;
+
+		&::before {
+			@extend %item-loading-pseudo;
+			@extend %placeholder-loading;
+		}
+	}
+
+	&.is-loading .message-recipient-item-label {
+		inline-size: 100%;
+		max-inline-size: 7.5em;
+
+		&::before {
+			inline-size: 100%;
+		}
+	}
+
+	&.is-loading .message-recipient-item-address {
+		inline-size: 100%;
+		max-inline-size: 12.5em;
+
+		&::before {
+			inline-size: 100%;
+		}
+	}
+
+	&.is-loading &-metas {
+		&::before {
+			inline-size: 10em;
+		}
+	}
+
+	&.is-loading &-to {
+		&::before {
+			inline-size: 1.25em;
+		}
+	}
+
+	&.is-loading &-contact {
+		&::before {
+			inline-size: 7.5em;
+		}
+	}
+
+	&.is-loading .message-show-hide-link-container {
+		&::before {
+			inline-size: 6em;
+		}
+	}
+}
+
+// hide extra container when there is nothing inside
+.message-header-extra:empty {
+	display: none;
+}
+
+// when expanded but no full details
+.message-header-expanded {
+	padding-block: 0.6em 0;
+	padding-inline: 0.6em;
+
+	.message-show-hide-link {
+		padding: 0;
+	}
+}
+
+// alignements when expanded/details
+.message-header--showDetails {
+	.message-show-hide-link-container {
+		padding-inline-start: calc(#{$container-to-width} + #{($conversation-icon-size)} + 0.75em);
+	}
+
+	// show/hide details should go below otherwise it will be strangely place depending of recipients
+	.message-header-recipients {
+		flex-direction: column;
+
+		& > * {
+			inline-size: 100%;
+			flex-basis: auto;
+		}
+	}
+
+	.message-recipient-item-expanded {
+		margin-block-start: 0.25em;
+
+		@include respond-to($breakpoint-small) {
+			margin-block-start: 0.5em;
+		}
+
+		.message-recipient-item:not(:first-child) {
+			margin-block-start: 0.25em;
+		}
+	}
+
+	// display of email default none except when details
+	.message-recipient-item-address,
+	.message-recipient-item-label {
+		@extend .text-ellipsis;
+
+		@include respond-to($breakpoint-small) {
+			display: block;
+		}
+	}
+
+	.message-recipient-item-lockIcon::before {
+		@include respond-to($breakpoint-small) {
+			content: '\00a0';
+			inline-size: 100%;
+		}
+	}
+}
+
+.message-detailed-header-extra {
+	.item-date {
+		font-size: rem(14);
+	}
+}
+
+/* states classes */
+.message-container.is-opened {
+	& > .message-header {
+		border-block-end: 1px solid var(--border-norm);
+		border-end-start-radius: 0;
+		border-end-end-radius: 0;
+		color: var(--text-norm);
+	}
+}
+
+.trashed-messages:focus,
+.message-container.is-focused {
+	border-color: var(--interaction-norm);
+}
+
+.message-container--hasAttachment {
+	.message-content {
+		border-radius: 0;
+	}
+}
+
+.message-content {
+	// transition: 0.5s easing(easeOutSine);
+	// transition-property: background-color, color;
+	// force color until real dark mode
+	&:not(.plain) {
+		background: white;
+		color: #262a33;
+	}
+	// as mail content is forced on white bg, button has to be forced as well
+	.toggle-original-message-button {
+		--button-default-border-color: silver;
+		--button-hover-border-color: silver;
+		--button-active-border-color: silver;
+		--button-default-text-color: inherit;
+		--button-hover-text-color: inherit;
+		--button-active-text-color: inherit;
+	}
+
+	&-loading-placeholder {
+		position: relative;
+
+		&::before {
+			@extend %item-loading-pseudo;
+			@extend %placeholder-loading;
+			inline-size: 100%;
+		}
+	}
+}
+
+.message-expand {
+	padding-block: 0 0.6em; // centers
+	padding-inline: 0.5em;
+	background-color: var(--background-weak);
+	line-height: 0.75;
+}
+
+.message-infobox {
+	background: var(--background-weak);
+}
+
+.container-to {
+	min-inline-size: $container-to-width;
+
+	.item-icon {
+		&:focus,
+		&:hover {
+			.item-abbr {
+				display: none;
+			}
+
+			.item-caret {
+				display: block;
+			}
+		}
+	}
+}

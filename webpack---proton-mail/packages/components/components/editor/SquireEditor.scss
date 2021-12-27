@@ -1,0 +1,115 @@
+
+$path-images: "~@proton/styles/assets/img/shared/";
+
+
+@import '~@proton/styles/scss/config';
+
+.simple-squire-editor.editor {
+	min-block-size: 14em;
+}
+
+.editor {
+	border: 1px solid var(--border-norm);
+
+	textarea {
+		color: currentColor;
+	}
+
+	.editor-toolbar-button {
+		padding-block: 0.3em;
+		padding-inline: 0.5em;
+		min-block-size: 2.1em;
+	}
+
+	.composer-toolbar-fontDropDown {
+		flex-shrink: 1;
+
+		& > span {
+			display: flex;
+
+			& > * {
+				min-inline-size: 0;
+			}
+		}
+	}
+}
+
+// .editor-toolbar {
+// 	border-block-end: 1px solid var(--border-norm);
+// }
+.editor-toolbar-separator {
+	border-inline-start: 1px solid var(--border-norm);
+}
+
+.editor-squire-wrapper {
+	.placeholder {
+		// The point is to match exactly Squire text content and position
+		font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+		font-size: rem(14);
+		line-height: 1.65;
+		// margin-inline-start: rem(8);
+		margin-block-start: rem(8);
+		color: grey;
+	}
+}
+
+.editor-toolbar-dropdown {
+	ul {
+		margin: 0;
+	}
+
+	button {
+		padding-inline: 0.5em;
+	}
+}
+
+.editor-toolbar-dropdown .color-selector-container {
+	max-inline-size: rem(210);
+}
+
+.editor-toolbar-dropdown .color-selector-item {
+	block-size: rem(28);
+	inline-size: rem(28);
+	margin-block: 0 rem(2);
+	margin-inline: 0 rem(2);
+}
+
+.editor--disabled::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background-color: var(--background-weak);
+	border-radius: var(--border-radius-medium);
+}
+
+.editor-toolbar-more-menu .dropdown-item.dropdown-item--no-separator {
+	border-block-start: none;
+}
+
+.editor-toolbar-button {
+	padding: 0.5em;
+
+	& > span {
+		margin-inline: 0;
+		inline-size: 100%;
+		display: flex;
+		align-items: center;
+
+		& > .mr0-5 {
+			flex: 1 1 0px;
+			text-align: start;
+			display: inline-flex;
+		}
+	}
+
+	.editor-toolbar-icon {
+		color: var(--text-norm);
+	}
+}
+
+.editor-toolbar-more-dropdown {
+	.editor-toolbar-icon {
+		width: em(16);
+		height: em(16);
+	}
+}
